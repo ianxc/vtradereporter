@@ -1,4 +1,4 @@
-package com.ianxc.vtradereporter.service;
+package com.ianxc.vtradereporter.service.submit;
 
 import com.ianxc.vtradereporter.repo.TradeRepository;
 import org.springframework.stereotype.Service;

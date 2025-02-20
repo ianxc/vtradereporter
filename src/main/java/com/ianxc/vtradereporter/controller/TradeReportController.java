@@ -1,8 +1,8 @@
 package com.ianxc.vtradereporter.controller;
 
 import com.ianxc.vtradereporter.model.api.Trade;
-import com.ianxc.vtradereporter.service.TradeQueryService;
-import com.ianxc.vtradereporter.service.TradeSubmissionService;
+import com.ianxc.vtradereporter.service.query.TradeQueryService;
+import com.ianxc.vtradereporter.service.submit.TradeSubmissionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
