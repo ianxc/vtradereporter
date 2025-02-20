@@ -14,10 +14,12 @@ import java.util.List;
 public class TradeQueryServiceImpl implements TradeQueryService {
     private final TradeMapper tradeMapper;
     private final TradeRepository tradeRepository;
+    private final TextCalc textCalc;
 
-    public TradeQueryServiceImpl(TradeMapper tradeMapper, TradeRepository tradeRepository) {
+    public TradeQueryServiceImpl(TradeMapper tradeMapper, TradeRepository tradeRepository, TextCalc textCalc) {
         this.tradeMapper = tradeMapper;
         this.tradeRepository = tradeRepository;
+        this.textCalc = textCalc;
     }
 
     @Override
@@ -25,6 +27,7 @@ public class TradeQueryServiceImpl implements TradeQueryService {
         final var dbFilteredTrades = tradeRepository.findAll(Spec.prefiltered);
         return dbFilteredTrades.stream()
                 .map(tradeMapper::toModel)
+                .filter(trade -> !textCalc.areAsciiAnagrams(trade.buyerParty(), trade.sellerParty()))
                 .toList();
     }
 }
