@@ -5,7 +5,7 @@ import org.springframework.core.io.InputStreamSource;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SpringIoUtil {
+public class SpringIoExt {
     public static InputStream inputStreamOf(InputStreamSource src) {
         try {
             return src.getInputStream();

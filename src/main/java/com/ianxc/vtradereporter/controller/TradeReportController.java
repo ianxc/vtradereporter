@@ -4,7 +4,7 @@ import com.ianxc.vtradereporter.model.api.Trade;
 import com.ianxc.vtradereporter.model.api.TradeSubmission;
 import com.ianxc.vtradereporter.service.query.TradeQueryService;
 import com.ianxc.vtradereporter.service.submit.TradeSubmissionService;
-import com.ianxc.vtradereporter.util.SpringIoUtil;
+import com.ianxc.vtradereporter.util.SpringIoExt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +29,7 @@ public class TradeReportController {
 
     @PostMapping("/submit")
     TradeSubmission submitTrades(List<MultipartFile> tradeFiles) {
-        final var tradeDataStreams = tradeFiles.stream().map(SpringIoUtil::inputStreamOf);
+        final var tradeDataStreams = tradeFiles.stream().map(SpringIoExt::inputStreamOf);
         return tss.submitTrades(tradeDataStreams);
     }
 
