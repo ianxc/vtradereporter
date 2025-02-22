@@ -1,6 +1,6 @@
 package com.ianxc.vtradereporter.controller;
 
-import com.ianxc.vtradereporter.service.criteria.UnknownTradeFilterException;
+import com.ianxc.vtradereporter.service.filter.UnknownTradeFilterException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,4 +1,4 @@
-package com.ianxc.vtradereporter.service.criteria;
+package com.ianxc.vtradereporter.service.filter;
 
 public class UnknownTradeFilterException extends RuntimeException {
     public UnknownTradeFilterException(String message) {

@@ -1,4 +1,4 @@
-package com.ianxc.vtradereporter.service.criteria;
+package com.ianxc.vtradereporter.service.filter;
 
 import com.ianxc.vtradereporter.model.api.Trade;
 import com.ianxc.vtradereporter.model.api.TradePredefinedFilterKind;

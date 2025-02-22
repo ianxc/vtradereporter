@@ -1,6 +1,6 @@
 package com.ianxc.vtradereporter.controller;
 
-import com.ianxc.vtradereporter.service.criteria.UnknownTradeFilterException;
+import com.ianxc.vtradereporter.service.filter.UnknownTradeFilterException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
