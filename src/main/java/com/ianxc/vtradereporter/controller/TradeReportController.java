@@ -1,6 +1,7 @@
 package com.ianxc.vtradereporter.controller;
 
 import com.ianxc.vtradereporter.model.api.Trade;
+import com.ianxc.vtradereporter.model.api.TradeSubmission;
 import com.ianxc.vtradereporter.service.query.TradeQueryService;
 import com.ianxc.vtradereporter.service.submit.TradeSubmissionService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,6 @@ public class TradeReportController {
 
     @PostMapping("/submit/bundled")
     TradeSubmission submitBundledTrades() {
-        final var count = tss.submitBundledTrades();
-        return new TradeSubmission(count);
+        return tss.submitBundledTrades();
     }
 }

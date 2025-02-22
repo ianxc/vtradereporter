@@ -1,6 +1,7 @@
 package com.ianxc.vtradereporter.service.submit;
 
 import com.ianxc.vtradereporter.mapper.TradeMapper;
+import com.ianxc.vtradereporter.model.api.TradeSubmission;
 import com.ianxc.vtradereporter.repo.TradeRepository;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -25,7 +26,7 @@ public class TradeSubmissionServiceImpl implements TradeSubmissionService {
     }
 
     @Override
-    public int submitBundledTrades() {
+    public TradeSubmission submitBundledTrades() {
         final Resource[] tradeEventResources;
         try {
             tradeEventResources = resourceResolver.getResources("classpath*:static/bundled-trades/*.xml");
@@ -46,7 +47,9 @@ public class TradeSubmissionServiceImpl implements TradeSubmissionService {
                 .map(tradeMapper::toEntity)
                 .toList();
 
+        // CrudRepository methods are already marked  with @Transactional and no other db operations are performed,
+        // so all trades are written safely in one transaction.
         tradeRepository.saveAll(trades);
-        return trades.size();
+        return new TradeSubmission(trades.size());
     }
 }

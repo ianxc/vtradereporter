@@ -1,4 +1,4 @@
-package com.ianxc.vtradereporter.controller;
+package com.ianxc.vtradereporter.model.api;
 
 public record TradeSubmission(int count) {
 }
