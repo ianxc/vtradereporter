@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -94,8 +95,8 @@ class XmlModelMapperTest {
         final var inputStream = new ByteArrayInputStream("test".getBytes());
 
         // Act & Assert
-        assertThatExceptionOfType(XmlModelMapperException.class).isThrownBy(() -> {
-            xmlModelMapper.extractModel(inputStream, (xpath, doc) -> "value");
-        }).withCauseExactlyInstanceOf(IOException.class);
+        assertThatThrownBy(() -> xmlModelMapper.extractModel(inputStream, (xpath, doc) -> "value"))
+                .isExactlyInstanceOf(XmlModelMapperException.class)
+                .hasCauseExactlyInstanceOf(IOException.class);
     }
 }
