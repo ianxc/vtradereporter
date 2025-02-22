@@ -4,7 +4,7 @@ import com.ianxc.vtradereporter.model.api.Trade;
 import com.ianxc.vtradereporter.model.api.TradePredefinedFilterKind;
 import com.ianxc.vtradereporter.repo.entity.TradeEntity;
 import com.ianxc.vtradereporter.repo.entity.TradeEntity_;
-import com.ianxc.vtradereporter.service.query.TextCalc;
+import com.ianxc.vtradereporter.util.TextCalc;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 

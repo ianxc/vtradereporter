@@ -1,4 +1,4 @@
-package com.ianxc.vtradereporter.service.query;
+package com.ianxc.vtradereporter.util;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

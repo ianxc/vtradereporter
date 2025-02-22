@@ -1,7 +1,7 @@
 package com.ianxc.vtradereporter.service.filter;
 
 import com.ianxc.vtradereporter.model.api.TradePredefinedFilterKind;
-import com.ianxc.vtradereporter.service.query.TextCalc;
+import com.ianxc.vtradereporter.util.TextCalc;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
