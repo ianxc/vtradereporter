@@ -14,3 +14,7 @@ spring:
 
   jpa:
     open-in-view: false
+
+  mvc:
+    problemdetails:
+      enabled: true
