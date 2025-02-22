@@ -80,9 +80,9 @@ class XmlModelMapperTest {
         final var inputStream = new ByteArrayInputStream("test".getBytes());
 
         // Act & Assert
-        assertThatExceptionOfType(XmlModelMapperException.class).isThrownBy(() -> {
-            xmlModelMapper.extractModel(inputStream, (xpath, doc) -> "value");
-        }).withCauseExactlyInstanceOf(SAXException.class);
+        assertThatThrownBy(() -> xmlModelMapper.extractModel(inputStream, (xpath, doc) -> "value"))
+                .isExactlyInstanceOf(XmlModelMapperException.class)
+                .hasCauseExactlyInstanceOf(SAXException.class);
     }
 
     @Test

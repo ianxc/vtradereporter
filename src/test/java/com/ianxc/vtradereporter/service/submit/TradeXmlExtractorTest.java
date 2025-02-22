@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 class TradeXmlExtractorTest {
 
     @Test
-    void when_ValidTradeXml_then_ExtractsTradeCorrectly() throws XPathExpressionException {
+    void when_validTradeXml_then_extractsTradeCorrectly() throws XPathExpressionException {
         // Arrange
         final XPath mockXPath = mock();
         final Document mockDocument = mock();
@@ -47,7 +47,7 @@ class TradeXmlExtractorTest {
     }
 
     @Test
-    void when_XPathEvaluationFails_then_ThrowsRuntimeException() throws XPathExpressionException {
+    void when_xpathEvaluationFails_then_throwsRuntimeException() throws XPathExpressionException {
         // Arrange
         final XPath mockXPath = mock();
         final Document mockDoc = mock();
