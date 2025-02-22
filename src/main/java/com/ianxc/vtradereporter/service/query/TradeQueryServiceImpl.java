@@ -5,6 +5,8 @@ import com.ianxc.vtradereporter.model.api.Trade;
 import com.ianxc.vtradereporter.repo.TradeRepository;
 import com.ianxc.vtradereporter.repo.entity.TradeEntity;
 import com.ianxc.vtradereporter.repo.entity.TradeEntity_;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,10 @@ public class TradeQueryServiceImpl implements TradeQueryService {
 
     @Override
     public List<Trade> getPrefilteredTrades() {
-        final var dbFilteredTrades = tradeRepository.findAll(Spec.prefiltered);
+        final var dbFilteredTrades = tradeRepository.findAll(
+                Spec.prefiltered,
+                Sort.by(Order.desc(TradeEntity_.CREATE_TIME), Order.asc(TradeEntity_.ID)));
+
         return dbFilteredTrades.stream()
                 .map(tradeMapper::toModel)
                 .filter(trade -> !textCalc.areAnagrams(trade.buyerParty(), trade.sellerParty()))

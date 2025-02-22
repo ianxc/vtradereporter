@@ -33,7 +33,7 @@ public class XmlModelMapper {
                     xpath.evaluate("//buyerPartyReference/@href", doc),
                     xpath.evaluate("//sellerPartyReference/@href", doc),
                     new BigDecimal(xpath.evaluate("//paymentAmount/amount", doc)),
-                    xpath.evaluate("//paymentAMount/currency", doc),
+                    xpath.evaluate("//paymentAmount/currency", doc),
                     null
             );
         } catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException e) {
