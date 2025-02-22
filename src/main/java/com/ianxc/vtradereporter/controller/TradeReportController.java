@@ -4,9 +4,11 @@ import com.ianxc.vtradereporter.model.api.Trade;
 import com.ianxc.vtradereporter.model.api.TradeSubmission;
 import com.ianxc.vtradereporter.service.query.TradeQueryService;
 import com.ianxc.vtradereporter.service.submit.TradeSubmissionService;
+import com.ianxc.vtradereporter.util.SpringIoUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,8 +28,9 @@ public class TradeReportController {
     }
 
     @PostMapping("/submit")
-    TradeSubmission submitTrades() {
-        throw new UnsupportedOperationException();
+    TradeSubmission submitTrades(List<MultipartFile> tradeFiles) {
+        final var tradeDataStreams = tradeFiles.stream().map(SpringIoUtil::inputStreamOf);
+        return tss.submitTrades(tradeDataStreams);
     }
 
     @PostMapping("/submit/bundled")
