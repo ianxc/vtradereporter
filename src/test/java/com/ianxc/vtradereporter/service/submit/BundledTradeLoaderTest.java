@@ -41,7 +41,7 @@ class BundledTradeLoaderTest {
     @Test
     void when_resourceLoadingFails_then_throwsRuntimeException() throws IOException {
         // Arrange
-        final var mockResolver = mock(ResourcePatternResolver.class);
+        final ResourcePatternResolver mockResolver = mock();
         when(mockResolver.getResources(anyString())).thenThrow(new IOException("Test exception"));
 
         final var loader = new BundledTradeLoader(mockResolver);
