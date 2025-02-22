@@ -1,4 +1,4 @@
-package com.ianxc.vtradereporter.service;
+package com.ianxc.vtradereporter.service.xml;
 
 import org.springframework.stereotype.Component;
 

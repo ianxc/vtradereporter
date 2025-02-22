@@ -27,7 +27,7 @@ public class TradeQueryServiceImpl implements TradeQueryService {
         final var dbFilteredTrades = tradeRepository.findAll(Spec.prefiltered);
         return dbFilteredTrades.stream()
                 .map(tradeMapper::toModel)
-                .filter(trade -> !textCalc.areAsciiAnagrams(trade.buyerParty(), trade.sellerParty()))
+                .filter(trade -> !textCalc.areAnagrams(trade.buyerParty(), trade.sellerParty()))
                 .toList();
     }
 }

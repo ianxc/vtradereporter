@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Component
 public class TextCalc {
-    boolean areAsciiAnagrams(String str1, String str2) {
+    boolean areAnagrams(String str1, String str2) {
         return freqOf(str1).equals(freqOf(str2));
     }
 
