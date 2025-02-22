@@ -33,7 +33,7 @@ public class TradeSubmissionServiceImpl implements TradeSubmissionService {
     }
 
     @Override
-    public TradeSubmission submitTrades(Stream<InputStream> tradeDataStreams) {
+    public TradeSubmission submitTrades(Stream<? extends InputStream> tradeDataStreams) {
         return persistTrades(tradeDataStreams);
     }
 
@@ -43,7 +43,7 @@ public class TradeSubmissionServiceImpl implements TradeSubmissionService {
         return persistTrades(tradeEvents);
     }
 
-    private TradeSubmission persistTrades(Stream<InputStream> tradeDataStreams) {
+    private TradeSubmission persistTrades(Stream<? extends InputStream> tradeDataStreams) {
         final var tradeEntities = tradeDataStreams.parallel()
                 .map(tradeData -> xmlModelMapper.extractModel(tradeData, tradeXmlExtractor))
                 .map(tradeMapper::toEntity)

@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.stream.Stream;
 
 public interface TradeSubmissionService {
-    TradeSubmission submitTrades(Stream<InputStream> tradeDataStreams);
+    TradeSubmission submitTrades(Stream<? extends InputStream> tradeDataStreams);
 
     TradeSubmission submitBundledTrades();
 }

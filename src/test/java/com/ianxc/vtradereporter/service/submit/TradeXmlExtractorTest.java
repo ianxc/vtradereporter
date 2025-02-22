@@ -16,25 +16,24 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class TradeXmlExtractorTest {
+    final XPath mockXPath = mock();
+    final Document mockDoc = mock();
+    final TradeXmlExtractor tradeXmlExtractor = new TradeXmlExtractor();
 
     @Test
     void when_validTradeXml_then_extractsTradeCorrectly() throws XPathExpressionException {
         // Arrange
-        final XPath mockXPath = mock();
-        final Document mockDocument = mock();
-        final var tradeXmlExtractor = new TradeXmlExtractor();
-
-        when(mockXPath.evaluate("//buyerPartyReference/@href", mockDocument))
+        when(mockXPath.evaluate("//buyerPartyReference/@href", mockDoc))
                 .thenReturn("Buyer");
-        when(mockXPath.evaluate("//sellerPartyReference/@href", mockDocument))
+        when(mockXPath.evaluate("//sellerPartyReference/@href", mockDoc))
                 .thenReturn("Seller");
-        when(mockXPath.evaluate("//paymentAmount/amount", mockDocument))
+        when(mockXPath.evaluate("//paymentAmount/amount", mockDoc))
                 .thenReturn("1234.56");
-        when(mockXPath.evaluate("//paymentAmount/currency", mockDocument))
+        when(mockXPath.evaluate("//paymentAmount/currency", mockDoc))
                 .thenReturn("AUD");
 
         // Act
-        final var result = tradeXmlExtractor.apply(mockXPath, mockDocument);
+        final var result = tradeXmlExtractor.apply(mockXPath, mockDoc);
 
         // Assert
         assertThat(result).isEqualTo(
@@ -49,10 +48,6 @@ class TradeXmlExtractorTest {
     @Test
     void when_xpathEvaluationFails_then_throwsRuntimeException() throws XPathExpressionException {
         // Arrange
-        final XPath mockXPath = mock();
-        final Document mockDoc = mock();
-        final var tradeXmlExtractor = new TradeXmlExtractor();
-
         when(mockXPath.evaluate(any(), eq(mockDoc)))
                 .thenThrow(new XPathExpressionException("Test exception"));
 

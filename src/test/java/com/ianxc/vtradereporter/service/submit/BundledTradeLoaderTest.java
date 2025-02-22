@@ -15,11 +15,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class BundledTradeLoaderTest {
+    final ResourcePatternResolver mockResolver = mock();
 
     @Test
     void when_resourcesExist_then_returnsStreamOfInputStreams() throws IOException {
         // Arrange
-        final ResourcePatternResolver mockResolver = mock();
         final Resource mockResource1 = mock();
         final Resource mockResource2 = mock();
         final var inputStream1 = new ByteArrayInputStream("trade1".getBytes(StandardCharsets.UTF_8));
@@ -41,7 +41,6 @@ class BundledTradeLoaderTest {
     @Test
     void when_resourceLoadingFails_then_throwsRuntimeException() throws IOException {
         // Arrange
-        final ResourcePatternResolver mockResolver = mock();
         when(mockResolver.getResources(anyString())).thenThrow(new IOException("Test exception"));
 
         final var loader = new BundledTradeLoader(mockResolver);
