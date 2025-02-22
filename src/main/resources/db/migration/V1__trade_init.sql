@@ -1,6 +1,10 @@
+CREATE SEQUENCE trade_seq
+    START WITH 1
+    INCREMENT BY 1;
+
 CREATE TABLE trade
 (
-    id               BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id               BIGINT DEFAULT NEXT VALUE FOR trade_seq PRIMARY KEY,
     buyer_party      VARCHAR(255)             NOT NULL,
     seller_party     VARCHAR(255)             NOT NULL,
     premium_amount   DECIMAL                  NOT NULL,

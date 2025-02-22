@@ -6,6 +6,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,8 @@ import java.time.Instant;
 public class TradeEntity {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "trade_seq")
+    @SequenceGenerator(name = "trade_seq", sequenceName = "trade_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "buyer_party", nullable = false)
