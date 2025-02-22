@@ -37,7 +37,7 @@ dependencies {
     implementation(libs.mapstruct)
     implementation(libs.springdoc.openapi)
 
-    annotationProcessor("org.hibernate:hibernate-jpamodelgen:6.6.5.Final")
+    annotationProcessor(libs.hibernate.jpamodelgen)
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor(libs.mapstruct.processor)
 
