@@ -2,6 +2,7 @@ package com.ianxc.vtradereporter.mapper;
 
 import com.ianxc.vtradereporter.model.api.Trade;
 import com.ianxc.vtradereporter.repo.entity.TradeEntity;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -10,4 +11,7 @@ public interface TradeMapper {
     @Mapping(target = "vgTradeId", source = "id")
     @Mapping(target = "recordedAt", source = "createTime")
     Trade toModel(TradeEntity entity);
+
+    @InheritInverseConfiguration
+    TradeEntity toEntity(Trade trade);
 }

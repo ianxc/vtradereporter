@@ -31,6 +31,7 @@ public class TradeReportController {
 
     @PostMapping("/submit/bundled")
     TradeSubmission submitBundledTrades() {
-        throw new UnsupportedOperationException();
+        final var count = tss.submitBundledTrades();
+        return new TradeSubmission(count);
     }
 }
