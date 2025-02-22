@@ -1,16 +1,16 @@
 package com.ianxc.vtradereporter.service.submit;
 
-import com.ianxc.vtradereporter.model.api.Trade;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
+import java.util.function.BiFunction;
 
 @Component
 public class XmlModelMapper {
@@ -22,21 +22,14 @@ public class XmlModelMapper {
         this.xpathFactory = xpathFactory;
     }
 
-    public Trade extractTrade(InputStream xmlStream) {
+    public <T> T extractModel(InputStream xmlStream, BiFunction<XPath, Document, T> extractor) {
         try {
             // init new doc builder and xpath as these aren't thread-safe.
             final var docBuilder = docBuilderFactory.newDocumentBuilder();
             final var doc = docBuilder.parse(xmlStream);
             final var xpath = xpathFactory.newXPath();
-            return new Trade(
-                    null,
-                    xpath.evaluate("//buyerPartyReference/@href", doc),
-                    xpath.evaluate("//sellerPartyReference/@href", doc),
-                    new BigDecimal(xpath.evaluate("//paymentAmount/amount", doc)),
-                    xpath.evaluate("//paymentAmount/currency", doc),
-                    null
-            );
-        } catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException e) {
+            return extractor.apply(xpath, doc);
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             // don't burden callers with a checked exception.
             throw new XmlModelMapperException(e);
         }
