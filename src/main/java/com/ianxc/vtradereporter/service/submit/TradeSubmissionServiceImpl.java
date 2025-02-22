@@ -4,13 +4,12 @@ import com.ianxc.vtradereporter.mapper.TradeMapper;
 import com.ianxc.vtradereporter.model.api.Trade;
 import com.ianxc.vtradereporter.model.api.TradeSubmission;
 import com.ianxc.vtradereporter.repo.TradeRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpressionException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
@@ -20,26 +19,16 @@ public class TradeSubmissionServiceImpl implements TradeSubmissionService {
     private final TradeMapper tradeMapper;
     private final TradeRepository tradeRepository;
     private final XmlModelMapper xmlModelMapper;
-    private final BiFunction<XPath, Document, Trade> extractor = (xpath, doc) -> {
-        try {
-            return new Trade(
-                    null,
-                    xpath.evaluate("//buyerPartyReference/@href", doc),
-                    xpath.evaluate("//sellerPartyReference/@href", doc),
-                    new BigDecimal(xpath.evaluate("//paymentAmount/amount", doc)),
-                    xpath.evaluate("//paymentAmount/currency", doc),
-                    null
-            );
-        } catch (XPathExpressionException e) {
-            throw new RuntimeException(e);
-        }
-    };
+    private final BiFunction<XPath, Document, Trade> tradeXmlExtractor;
 
     public TradeSubmissionServiceImpl(BundledTradeLoader tradeLoader, TradeMapper tradeMapper,
-                                      TradeRepository tradeRepository, XmlModelMapper xmlModelMapper) {
+                                      TradeRepository tradeRepository,
+                                      @Qualifier("tradeXmlExtractor") BiFunction<XPath, Document, Trade> tradeXmlExtractor,
+                                      XmlModelMapper xmlModelMapper) {
         this.tradeLoader = tradeLoader;
         this.tradeMapper = tradeMapper;
         this.tradeRepository = tradeRepository;
+        this.tradeXmlExtractor = tradeXmlExtractor;
         this.xmlModelMapper = xmlModelMapper;
     }
 
@@ -56,7 +45,7 @@ public class TradeSubmissionServiceImpl implements TradeSubmissionService {
 
     private TradeSubmission persistTrades(Stream<InputStream> tradeDataStreams) {
         final var tradeEntities = tradeDataStreams.parallel()
-                .map(tradeData -> xmlModelMapper.extractModel(tradeData, this.extractor))
+                .map(tradeData -> xmlModelMapper.extractModel(tradeData, tradeXmlExtractor))
                 .map(tradeMapper::toEntity)
                 .toList();
 
