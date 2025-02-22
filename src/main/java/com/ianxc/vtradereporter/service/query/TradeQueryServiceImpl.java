@@ -5,6 +5,7 @@ import com.ianxc.vtradereporter.model.api.Trade;
 import com.ianxc.vtradereporter.repo.TradeRepository;
 import com.ianxc.vtradereporter.repo.entity.TradeEntity;
 import com.ianxc.vtradereporter.repo.entity.TradeEntity_;
+import com.ianxc.vtradereporter.service.criteria.TradeFilterFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,14 +15,17 @@ import java.util.List;
 
 @Service
 public class TradeQueryServiceImpl implements TradeQueryService {
+    private final TextCalc textCalc;
+    private final TradeFilterFactory tradeFilterFactory;
     private final TradeMapper tradeMapper;
     private final TradeRepository tradeRepository;
-    private final TextCalc textCalc;
 
-    public TradeQueryServiceImpl(TradeMapper tradeMapper, TradeRepository tradeRepository, TextCalc textCalc) {
+    public TradeQueryServiceImpl(TextCalc textCalc, TradeFilterFactory tradeFilterFactory,
+                                 TradeMapper tradeMapper, TradeRepository tradeRepository) {
+        this.textCalc = textCalc;
+        this.tradeFilterFactory = tradeFilterFactory;
         this.tradeMapper = tradeMapper;
         this.tradeRepository = tradeRepository;
-        this.textCalc = textCalc;
     }
 
     @Override
