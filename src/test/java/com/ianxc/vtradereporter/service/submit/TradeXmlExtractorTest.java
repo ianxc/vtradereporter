@@ -53,7 +53,7 @@ class TradeXmlExtractorTest {
 
         // Act & Assert
         assertThatThrownBy(() -> tradeXmlExtractor.apply(mockXPath, mockDoc))
-                .isExactlyInstanceOf(RuntimeException.class)
+                .isExactlyInstanceOf(XmlExtractorException.class)
                 .hasCauseExactlyInstanceOf(XPathExpressionException.class);
     }
 }

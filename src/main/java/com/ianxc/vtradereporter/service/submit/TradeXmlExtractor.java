@@ -26,7 +26,7 @@ public class TradeXmlExtractor implements BiFunction<XPath, Document, Trade> {
                     null
             );
         } catch (XPathExpressionException e) {
-            throw new RuntimeException(e);
+            throw new XmlExtractorException(e);
         }
     }
 }
