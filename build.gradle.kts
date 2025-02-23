@@ -35,8 +35,8 @@ dependencies {
     implementation(libs.mapstruct)
     implementation(libs.springdoc.openapi)
 
-    annotationProcessor(libs.hibernate.jpamodelgen)
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor(libs.hibernate.jpamodelgen)
     annotationProcessor(libs.mapstruct.processor)
 
     runtimeOnly("com.h2database:h2")
