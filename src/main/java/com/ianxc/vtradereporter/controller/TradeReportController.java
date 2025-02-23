@@ -28,12 +28,22 @@ public class TradeReportController {
         this.tss = tss;
     }
 
+    /**
+     * Queries trades which satisfy arbitrarily-complex filters implemented within this app.
+     * @param kind The redefined filter to use for the query.
+     * @return A list of trades which satisfy the predefined filter.
+     */
     @GetMapping(value = "/prefiltered", produces = MediaType.APPLICATION_JSON_VALUE)
     List<Trade> getPrefilteredTrades(@RequestParam(value = "kind", defaultValue = "CHALLENGE")
                                      TradePredefinedFilterKind kind) {
         return tqs.getPrefilteredTrades(kind);
     }
 
+    /**
+     * Submits a list of user-uploaded trade data files for later querying.
+     * @param tradeFiles A list of valid XML files holding trade data.
+     * @return A summary of the trade submission request.
+     */
     @PostMapping(value = "/submit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     TradeSubmission submitTrades(@RequestPart("tradeFiles") List<? extends MultipartFile> tradeFiles) {
@@ -41,6 +51,10 @@ public class TradeReportController {
         return tss.submitTrades(tradeDataStreams);
     }
 
+    /**
+     * Submits a list of trade data files that are bundled with the app for later querying.
+     * @return A summary of the trade submission request.
+     */
     @PostMapping(value = "/submit/bundled", produces = MediaType.APPLICATION_JSON_VALUE)
     TradeSubmission submitBundledTrades() {
         return tss.submitBundledTrades();

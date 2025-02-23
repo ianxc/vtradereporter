@@ -2,10 +2,13 @@
 # match spring boot version - some artifacts aren't covered by spring dependency management.
 hibernate = "6.6.5.Final"
 mapstruct = "1.6.3"
+runtime-javadoc = "0.15.0"
 springdoc-openapi = "2.8.5"
 
 [libraries]
 hibernate-jpamodelgen = { module = "org.hibernate:hibernate-jpamodelgen", version.ref = "hibernate" }
 mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapstruct" }
 mapstruct-processor = { module = "org.mapstruct:mapstruct-processor", version.ref = "mapstruct" }
+runtime-javadoc = { module = "com.github.therapi:therapi-runtime-javadoc", version.ref = "runtime-javadoc" }
+runtime-javadoc-scribe = { module = "com.github.therapi:therapi-runtime-javadoc-scribe", version.ref = "runtime-javadoc" }
 springdoc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc-openapi" }

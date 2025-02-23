@@ -33,16 +33,17 @@ dependencies {
     implementation("io.micrometer:micrometer-tracing-bridge-brave")
     implementation("org.flywaydb:flyway-core")
     implementation(libs.mapstruct)
+    implementation(libs.runtime.javadoc)
     implementation(libs.springdoc.openapi)
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor(libs.hibernate.jpamodelgen)
     annotationProcessor(libs.mapstruct.processor)
+    annotationProcessor(libs.runtime.javadoc.scribe)
 
     runtimeOnly("com.h2database:h2")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
