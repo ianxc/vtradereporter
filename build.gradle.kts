@@ -1,8 +1,8 @@
 plugins {
     java
+    jacoco
     id("io.freefair.lombok") version "8.12.1"
     id("io.spring.dependency-management") version "1.1.7"
-    id("org.asciidoctor.jvm.convert") version "3.3.2"
     id("org.springframework.boot") version "3.4.2"
 }
 
@@ -25,8 +25,6 @@ configurations {
 repositories {
     mavenCentral()
 }
-
-extra["snippetsDir"] = file("build/generated-snippets")
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -53,11 +51,6 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-tasks.test {
-    outputs.dir(project.extra["snippetsDir"]!!)
-}
-
-tasks.asciidoctor {
-    inputs.dir(project.extra["snippetsDir"]!!)
+tasks.jacocoTestReport {
     dependsOn(tasks.test)
 }
