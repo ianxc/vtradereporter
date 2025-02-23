@@ -1,8 +1,8 @@
 CREATE INDEX idx_trade_buyer_party
     ON trade (buyer_party);
 
-CREATE INDEX idx_trade_create_time_desc
-    ON trade (create_time DESC);
+CREATE INDEX idx_trade_create_time_desc_id
+    ON trade (create_time DESC, id);
 
 CREATE INDEX idx_trade_premium_amount
     ON trade (premium_amount);

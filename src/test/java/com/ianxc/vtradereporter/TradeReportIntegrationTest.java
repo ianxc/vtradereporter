@@ -31,7 +31,7 @@ class TradeReportIntegrationTest {
     @Test
     void when_submitBundledTradesAndGetFiltered_then_returnsMatchingTrades() {
         // Submit the bundled trades
-        final var submissionResponse = restTemplate.postForEntity("/trades/submit/bundled", null, TradeSubmission.class);
+        final var submissionResponse = restTemplate.postForEntity("/trades/batch/bundled", null, TradeSubmission.class);
 
         assertThat(submissionResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(submissionResponse.getBody()).isNotNull();

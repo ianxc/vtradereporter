@@ -44,7 +44,7 @@ public class TradeReportController {
      * @param tradeFiles A list of valid XML files holding trade data.
      * @return A summary of the trade submission request.
      */
-    @PostMapping(value = "/submit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+    @PostMapping(value = "/batch", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     TradeSubmission submitTrades(@RequestPart("tradeFiles") List<? extends MultipartFile> tradeFiles) {
         final var tradeDataStreams = tradeFiles.stream().map(SpringIoExt::inputStreamOf);
@@ -55,7 +55,7 @@ public class TradeReportController {
      * Submits a list of trade data files that are bundled with the app for later querying.
      * @return A summary of the trade submission request.
      */
-    @PostMapping(value = "/submit/bundled", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/batch/bundled", produces = MediaType.APPLICATION_JSON_VALUE)
     TradeSubmission submitBundledTrades() {
         return tss.submitBundledTrades();
     }

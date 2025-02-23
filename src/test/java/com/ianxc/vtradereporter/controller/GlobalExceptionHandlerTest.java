@@ -13,7 +13,7 @@ class GlobalExceptionHandlerTest {
     void when_UnknownTradeFilterException_then_returnClientError() {
         final var pr = handler.handle(new UnknownTradeFilterException("hello"));
 
-        assertThat(pr.getStatus()).isEqualTo(400);
+        assertThat(pr.getStatus()).isEqualTo(422);
         assertThat(pr.getDetail()).isEqualTo("hello");
     }
 

@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class VTradeReporterAppTest {
 
     @Test
-    void contextLoads() {
+    void when_appStarts_then_contextLoads() {
     }
 
 }
