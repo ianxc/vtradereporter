@@ -33,7 +33,7 @@ public class TradeReportController {
     }
 
     @PostMapping(value = "/submit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    TradeSubmission submitTrades(@RequestPart("tradeFiles") List<MultipartFile> tradeFiles) {
+    TradeSubmission submitTrades(@RequestPart("tradeFiles") List<? extends MultipartFile> tradeFiles) {
         final var tradeDataStreams = tradeFiles.stream().map(SpringIoExt::inputStreamOf);
         return tss.submitTrades(tradeDataStreams);
     }
