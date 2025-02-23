@@ -33,10 +33,10 @@ class TradeRepositoryTest {
         tradeEntity2.setPremiumAmount(new BigDecimal("9.23"));
         tradeEntity2.setPremiumCurrency("NZD");
 
-        final var result = tradeRepository.saveAll(List.of(tradeEntity1, tradeEntity2));
+        tradeRepository.saveAll(List.of(tradeEntity1, tradeEntity2));
 
         assertThat(tradeRepository.count()).isEqualTo(2);
-        assertThat(result).extracting(TradeEntity::getBuyerParty)
+        assertThat(tradeRepository.findAll()).extracting(TradeEntity::getBuyerParty)
                 .containsExactlyInAnyOrder("Buyer1", "Buyer2");
     }
 }
