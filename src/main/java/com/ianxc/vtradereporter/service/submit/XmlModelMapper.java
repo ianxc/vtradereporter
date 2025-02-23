@@ -24,7 +24,8 @@ public class XmlModelMapper {
 
     public <T> T extractModel(InputStream xmlStream, BiFunction<XPath, Document, T> extractor) {
         try {
-            // init new doc builder and xpath as these aren't thread-safe. factory methods are thread-safe though.
+            // init new doc builder and xpath as these aren't thread-safe.
+            // newDocumentBuilder and newXPath methods are thread-safe though.
             final var docBuilder = docBuilderFactory.newDocumentBuilder();
             final var doc = docBuilder.parse(xmlStream);
             final var xpath = xpathFactory.newXPath();
