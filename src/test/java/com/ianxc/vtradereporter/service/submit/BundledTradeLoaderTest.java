@@ -18,7 +18,7 @@ class BundledTradeLoaderTest {
     final ResourcePatternResolver mockResolver = mock();
 
     @Test
-    void when_resourcesExist_then_returnsStreamOfInputStreams() throws IOException {
+    void when_resourcesExist_then_returnStreamOfInputStreams() throws IOException {
         // Arrange
         final Resource mockResource1 = mock();
         final Resource mockResource2 = mock();
@@ -39,7 +39,7 @@ class BundledTradeLoaderTest {
     }
 
     @Test
-    void when_resourceLoadingFails_then_throwsRuntimeException() throws IOException {
+    void when_resourceLoadingFails_then_throwRuntimeException() throws IOException {
         // Arrange
         when(mockResolver.getResources(anyString())).thenThrow(new IOException("Test exception"));
 

@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 class SpringIoExtTest {
 
     @Test
-    void when_validSource_then_returnsInputStream() throws IOException {
+    void when_validSource_then_returnInputStream() throws IOException {
         // Arrange
         final InputStreamSource mockSource = mock();
         final var expectedStream = new ByteArrayInputStream("test data".getBytes());
@@ -28,7 +28,7 @@ class SpringIoExtTest {
     }
 
     @Test
-    void when_sourceThrowsIOException_then_throwsRuntimeException() throws IOException {
+    void when_sourceThrowsIOException_then_throwRuntimeException() throws IOException {
         // Arrange
         final InputStreamSource mockSource = mock();
         when(mockSource.getInputStream()).thenThrow(new IOException("Test exception"));

@@ -46,7 +46,7 @@ class TradeXmlExtractorTest {
     }
 
     @Test
-    void when_xpathEvaluationFails_then_throwsRuntimeException() throws XPathExpressionException {
+    void when_xpathEvaluationFails_then_throwRuntimeException() throws XPathExpressionException {
         // Arrange
         when(mockXPath.evaluate(any(), eq(mockDoc)))
                 .thenThrow(new XPathExpressionException("Test exception"));

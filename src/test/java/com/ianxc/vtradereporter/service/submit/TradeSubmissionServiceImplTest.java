@@ -27,8 +27,8 @@ class TradeSubmissionServiceImplTest {
     final XmlModelMapper xmlModelMapper = mock();
     final BiFunction<XPath, Document, Trade> tradeXmlExtractor = mock();
 
-    final Trade trade1 = new Trade(null, "buyer1", "seller1", new BigDecimal("100"), "USD", null);
-    final Trade trade2 = new Trade(null, "buyer2", "seller2", new BigDecimal("200"), "EUR", null);
+    final Trade trade1 = new Trade(null, "buyer1", "seller1", new BigDecimal("100"), "AUD", null);
+    final Trade trade2 = new Trade(null, "buyer2", "seller2", new BigDecimal("200"), "USD", null);
     final TradeEntity tradeEntity1 = new TradeEntity();
     final TradeEntity tradeEntity2 = new TradeEntity();
 
@@ -61,7 +61,7 @@ class TradeSubmissionServiceImplTest {
     }
 
     @Test
-    void when_submittingBundledTrades_then_returnsSuccessfulSubmission() {
+    void when_submittingBundledTrades_then_returnSuccessfulSubmission() {
         // Arrange
         when(tradeLoader.loadBundledTrades()).thenReturn(Stream.of(inputStream1, inputStream2));
         when(xmlModelMapper.extractModel(any(), any())).thenReturn(trade1, trade2);
