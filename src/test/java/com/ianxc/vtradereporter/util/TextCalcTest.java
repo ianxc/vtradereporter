@@ -12,7 +12,7 @@ class TextCalcTest {
     @CsvSource({
             "abc, bac, true",
             "abc, bAc, false",
-            "EMU_BANK, KEMU_NAB, true",
+            "EMU_BANK, UME_BANK, true",
             "ab, abc, false",
     })
     void when_anagram_then_returnTrueOtherwiseFalse(String s1, String s2, boolean expected) {
