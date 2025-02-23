@@ -18,7 +18,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(XmlExtractorException.class)
     public ProblemDetail handle(XmlExtractorException e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,
+        return ProblemDetail.forStatusAndDetail(HttpStatus.UNPROCESSABLE_ENTITY,
                 "Failed to parse XML data. Check that the contents conform to the required schema.");
     }
 }

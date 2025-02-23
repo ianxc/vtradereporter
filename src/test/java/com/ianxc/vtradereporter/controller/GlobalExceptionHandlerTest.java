@@ -21,7 +21,7 @@ class GlobalExceptionHandlerTest {
     void when_XmlExtractorException_then_returnClientError() {
         final var pr = handler.handle(new XmlExtractorException(new RuntimeException()));
 
-        assertThat(pr.getStatus()).isEqualTo(400);
+        assertThat(pr.getStatus()).isEqualTo(422);
         assertThat(pr.getDetail()).isEqualTo("Failed to parse XML data. Check that the contents conform to the required schema.");
     }
 }
