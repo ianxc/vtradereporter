@@ -24,7 +24,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
         "TRUNCATE TABLE trade;",
         "ALTER SEQUENCE trade_seq RESTART WITH 1;"
 })
-class TradeReportControllerIntegrationTest {
+class TradeReportIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
