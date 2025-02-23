@@ -31,6 +31,7 @@ class TradeQueryServiceImplTest {
     final Specification<TradeEntity> mockSpecification = mock();
     final TradeQueryService service = new TradeQueryServiceImpl(mockFilterFactory, mockMapper, mockRepository);
 
+    @SuppressWarnings("unchecked")
     @Test
     void when_validFilterKind_then_returnFilteredTrades() {
         // Arrange
@@ -45,7 +46,7 @@ class TradeQueryServiceImplTest {
         when(mockFilterFactory.getPredefinedFilter(TradePredefinedFilterKind.CHALLENGE)).thenReturn(mockFilter);
         when(mockFilter.getDbFilter()).thenReturn(mockSpecification);
         when(mockFilter.getAppFilter()).thenReturn(appFilter);
-        // noinspection unchecked
+        // suppress unchecked cast due to type erase of Specification<TradeEntity>
         when(mockRepository.findAll(any(Specification.class), any(Sort.class))).thenReturn(entities);
         when(mockMapper.toModel(entity1)).thenReturn(trade1);
         when(mockMapper.toModel(entity2)).thenReturn(trade2);
