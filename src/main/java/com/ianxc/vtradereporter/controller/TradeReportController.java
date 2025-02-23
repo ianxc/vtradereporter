@@ -30,6 +30,7 @@ public class TradeReportController {
 
     /**
      * Queries trades which satisfy arbitrarily-complex filters implemented within this app.
+     *
      * @param kind The redefined filter to use for the query.
      * @return A list of trades which satisfy the predefined filter.
      */
@@ -41,6 +42,7 @@ public class TradeReportController {
 
     /**
      * Submits a list of user-uploaded trade data files for later querying.
+     *
      * @param tradeFiles A list of valid XML files holding trade data.
      * @return A summary of the trade submission request.
      */
@@ -53,6 +55,7 @@ public class TradeReportController {
 
     /**
      * Submits a list of trade data files that are bundled with the app for later querying.
+     *
      * @return A summary of the trade submission request.
      */
     @PostMapping(value = "/batch/bundled", produces = MediaType.APPLICATION_JSON_VALUE)
