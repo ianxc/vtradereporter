@@ -1,13 +1,13 @@
-package com.ianxc.vtradereporter.controller;
+package com.ianxc.vtradereporter;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ianxc.vtradereporter.model.api.Trade;
 import com.ianxc.vtradereporter.model.api.TradeSubmission;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -16,9 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 @Sql(statements = {
         "TRUNCATE TABLE trade;",
@@ -29,11 +28,8 @@ class TradeReportIntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Test
-    void when_submitBundledTradesAndGetFiltered_then_returnsMatchingTrades() throws Exception {
+    void when_submitBundledTradesAndGetFiltered_then_returnsMatchingTrades() {
         // Submit the bundled trades
         final var submissionResponse = restTemplate.postForEntity("/trades/submit/bundled", null, TradeSubmission.class);
 
@@ -42,15 +38,15 @@ class TradeReportIntegrationTest {
         assertThat(submissionResponse.getBody().count()).isPositive();
 
         // Then get filtered trades
-        final var filteredResponse = restTemplate.getForEntity("/trades/prefiltered?kind=CHALLENGE", byte[].class);
+        final var listTradeTypeRef = new ParameterizedTypeReference<List<Trade>>() {
+        };
+        final var filteredResponse = restTemplate.exchange("/trades/prefiltered?kind=CHALLENGE", HttpMethod.GET, null, listTradeTypeRef);
 
         assertThat(filteredResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(filteredResponse.getBody()).isNotNull();
 
-        final var trades = objectMapper.readValue(filteredResponse.getBody(), new TypeReference<List<Trade>>() {
-        });
-
         // Verify filtered results
+        final var trades = filteredResponse.getBody();
         assertThat(trades).isNotEmpty();
         assertThat(trades).allSatisfy(trade -> {
             final var opt1 = "EMU_BANK".equals(trade.sellerParty()) && "AUD".equals(trade.premiumCurrency());
